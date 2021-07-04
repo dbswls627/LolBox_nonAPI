@@ -22,12 +22,25 @@ class MainActivity : AppCompatActivity() {
         "타릭", "탈론", "탈리야", "탐 켄치", "트런들", "트리스타나", "트린다미어", "트위스티드 페이트", "트위치", "티모",
         "파이크", "판테온", "피들스틱", "피오라", "피즈",
         "하이머딩거", "헤카림")
+    val img = arrayListOf<Int>(R.drawable.garen,R.drawable.galio,R.drawable.gangplank,R.drawable.gragas,R.drawable.graves,R.drawable.gwen,
+        R.drawable.gnar,R.drawable.nami,R.drawable.nasus,R.drawable.nautilus,R.drawable.nocturne,R.drawable.nunu,R.drawable.nidalee,R.drawable.neeko,
+        R.drawable.darius,R.drawable.diana,R.drawable.draven,
+        R.drawable.ryze,R.drawable.rakan,R.drawable.rammus,R.drawable.lux,R.drawable.rumble,R.drawable.renekton,R.drawable.leona,R.drawable.reksai,R.drawable.rell,R.drawable.rengar,R.drawable.lucian,R.drawable.lulu,R.drawable.leblanc,R.drawable.leesin,R.drawable.riven,R.drawable.lissandra,R.drawable.lillia,
+        R.drawable.masteryi,R.drawable.maokai,R.drawable.malzahar,R.drawable.malphite,R.drawable.mordekaiser,R.drawable.morgana,R.drawable.drmundo,R.drawable.missfortune,
+        R.drawable.bard,R.drawable.varus,R.drawable.vi,R.drawable.veigar,R.drawable.vayne,R.drawable.velkoz,R.drawable.volibear,R.drawable.braum,R.drawable.brand,R.drawable.vladimir,R.drawable.blitzcrank,R.drawable.viego,R.drawable.viktor,R.drawable.poppy,
+        R.drawable.samira,R.drawable.sion,R.drawable.sylas,R.drawable.shaco,R.drawable.senna,R.drawable.seraphine,R.drawable.sejuani,R.drawable.sett,R.drawable.sona,R.drawable.soraka,R.drawable.shen,R.drawable.shyvana,R.drawable.swain,R.drawable.skarner,R.drawable.sivir,R.drawable.xinzhao,R.drawable.syndra,R.drawable.singed,R.drawable.thresh,
+        R.drawable.ahri,R.drawable.amumu,R.drawable.aurelionsol,R.drawable.ivern,R.drawable.azir,R.drawable.akali,R.drawable.aatrox,R.drawable.aphelios,R.drawable.alistar,R.drawable.annie,R.drawable.anivia,R.drawable.ashe,R.drawable.yasuo,R.drawable.ekko,R.drawable.elise,R.drawable.monkeyking,R.drawable.ornn,R.drawable.orianna,R.drawable.olaf,R.drawable.yone,R.drawable.yorick,R.drawable.udyr,R.drawable.urgot,R.drawable.warwick,R.drawable.yuumi,R.drawable.irelia,R.drawable.evelynn,R.drawable.ezreal,R.drawable.illaoi,
+        R.drawable.jarvan4,R.drawable.xayah,R.drawable.zyra,R.drawable.zac,R.drawable.janna,R.drawable.jax,R.drawable.zed,R.drawable.xerath,R.drawable.jayce,R.drawable.zoe,R.drawable.ziggs,R.drawable.jhin,R.drawable.zilean,R.drawable.jinx,R.drawable.chogath,
+        R.drawable.karma,R.drawable.camille,R.drawable.kassadin,R.drawable.karthus,R.drawable.cassiopeia,R.drawable.kaisa,R.drawable.khazix,R.drawable.katarina,R.drawable.kalista,R.drawable.kennen,R.drawable.caitlyn,R.drawable.kayn,R.drawable.kayle,R.drawable.kogmaw,R.drawable.corki,R.drawable.quinn,R.drawable.kled,R.drawable.qiyana,R.drawable.kindred,
+        R.drawable.taric,R.drawable.talon,R.drawable.taliyah,R.drawable.tahmkench,R.drawable.trundle,R.drawable.tristana,R.drawable.tryndamere,R.drawable.twistedfate,R.drawable.twitch,R.drawable.teemo,
+        R.drawable.pyke,R.drawable.pantheon,R.drawable.fiddlesticks,R.drawable.fiora,R.drawable.fizz,
+        R.drawable.heimerdinger,R.drawable.hecarim)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val list = arrayListOf<Cham>()
-        for (a in name){
-            list.add(Cham(R.drawable.one,a,false,false))
+        for (index in img.indices ){
+            list.add(Cham(img[index],name[index],false,false))
         }
         rv.layoutManager=LinearLayoutManager(this)
         rv.adapter=adapter(list)
