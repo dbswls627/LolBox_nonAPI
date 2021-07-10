@@ -1,14 +1,16 @@
 package com.example.lolbox
 
-import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-
-
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
+    val list = arrayListOf<Cham>()
+    val filteredList = arrayListOf<Cham>()
     val name= arrayListOf<String>("가렌", "갈리오","갱플랭크", "그라가스", "그레이브즈", "그웬",
         "나르", "나미", "나서스", "노틸러스", "녹턴", "누누와 윌럼프", "니달리", "니코",
         "다리우스", "다이애나", "드레이븐",
@@ -38,11 +40,37 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val list = arrayListOf<Cham>()
+
         for (index in img.indices ){
             list.add(Cham(img[index],name[index],false,false))
         }
         rv.layoutManager=LinearLayoutManager(this)
         rv.adapter=adapter(list)
+        search.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {
+                val searchText: String = search.text.toString()
+                searchFilter(searchText)
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+            }
+        })
+        }
+    private fun searchFilter(searchText: String) {
+        filteredList.clear()
+        for (i in 0 until list.size) {
+            if (list[i].name.length >= searchText.length) {
+                if (list[i].name.substring(0, searchText.length).contains(searchText)) {
+                    filteredList.add(list[i])
+                }
+            }
+        }
+        rv.adapter=adapter(filteredList)
     }
 }
