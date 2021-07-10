@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             list.add(Cham(img[index],name[index],false,false))
         }
         rv.layoutManager=LinearLayoutManager(this)
-        rv.adapter=adapter(list)
+        rv.adapter=adapter(list,this)
         search.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {
@@ -71,6 +71,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        rv.adapter=adapter(filteredList)
+        rv.adapter=adapter(filteredList,this)
     }
 }
