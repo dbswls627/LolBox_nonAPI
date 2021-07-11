@@ -1,20 +1,18 @@
 package com.example.lolbox
 
 import android.os.Bundle
-import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class mainFragment : Fragment() {
     companion object {
         val list = arrayListOf<Cham>()
-        val filteredList = arrayListOf<Cham>()
+        val searchlist = arrayListOf<Cham>()
+        val savelist = arrayListOf<Cham>(Cham(R.drawable.ic_setting,"",null,true))
         val name = arrayListOf<String>(
                 "가렌",
                 "갈리오",
@@ -354,7 +352,13 @@ class mainFragment : Fragment() {
         rv.layoutManager = LinearLayoutManager(requireContext())
         rv.adapter=adapter(list,requireContext())
     }
-     fun filter(){
-         rv.adapter=adapter(filteredList,requireContext())
+     fun search(){
+         rv.adapter=adapter(searchlist,requireContext())
+    }
+    fun all(){
+        rv.adapter=adapter(list,requireContext())
+    }
+    fun save(){
+        rv.adapter=adapter(savelist,requireContext())
     }
 }

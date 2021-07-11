@@ -10,21 +10,36 @@
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <HorizontalScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <Button
-        android:id="@+id/all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="모든 챔피언"/>
-    <Button
-        android:id="@+id/save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="보유 챔피언"/>
+        android:scrollbarSize="3dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/all"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:text="모든 챔피언"
+                android:background="@drawable/button"
+                />
+            <Button
+                android:id="@+id/save"
+                android:layout_width="0dp"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:layout_weight="1"
+                android:text="보유 챔피언"/>
+
     </LinearLayout>
+    </HorizontalScrollView>
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
