@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-
     <EditText
         android:id="@+id/search"
         android:layout_width="match_parent"
@@ -26,7 +24,6 @@
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:text="모든 챔피언"
-                android:background="@drawable/button"
                 />
             <Button
                 android:id="@+id/save"
@@ -34,7 +31,7 @@
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button"
+               
                 android:layout_weight="1"
                 android:text="보유 챔피언"/>
 
