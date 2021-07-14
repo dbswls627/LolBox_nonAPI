@@ -1,5 +1,6 @@
 package com.example.lolbox
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,9 +11,10 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class mainFragment : Fragment() {
     companion object {
-        val list = arrayListOf<Cham>()
+        var list = arrayListOf<Cham>()
         val searchlist = arrayListOf<Cham>()
-        val savelist = arrayListOf<Cham>(Cham(R.drawable.ic_setting,"",null,true))
+        var clonelist = arrayListOf<Cham>()
+        val savelist = arrayListOf<Cham>()
         val name = arrayListOf<String>(
                 "가렌",
                 "갈리오",
@@ -347,7 +349,12 @@ class mainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         for (index in img.indices ){
-            list.add(Cham(img[index],name[index],false,false))
+            list.add(Cham(img[index],name[index], box = false, save = false))
+        }
+        for (index in img.indices ){
+            if(list[index].save){
+                savelist.add(list[index])
+            }
         }
         rv.layoutManager = LinearLayoutManager(requireContext())
         rv.adapter=adapter(list,requireContext())
@@ -361,4 +368,5 @@ class mainFragment : Fragment() {
     fun save(){
         rv.adapter=adapter(savelist,requireContext())
     }
+
 }

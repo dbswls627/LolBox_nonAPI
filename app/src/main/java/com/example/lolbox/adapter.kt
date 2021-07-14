@@ -1,10 +1,12 @@
 package com.example.lolbox
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -44,7 +46,7 @@ class adapter(val list:ArrayList<Cham>,val context : Context):RecyclerView.Adapt
         holder.itemView.setOnClickListener {
             if (list[position].box==null){
                 val intent = Intent(holder.itemView.context, EditActivity::class.java)
-                    ContextCompat.startActivity(holder.itemView.context,intent,null)
+                startActivityForResult(holder.itemView.context as Activity,intent,1,null)
             }
         }
     }

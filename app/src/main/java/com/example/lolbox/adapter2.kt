@@ -1,20 +1,16 @@
 package com.example.lolbox
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckedTextView
-import android.widget.TextView
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.editlist_item.view.*
-import kotlinx.android.synthetic.main.list_item.view.*
 
 
 class CustuomViewHolder2(v : View) : RecyclerView.ViewHolder(v){
     val ct: CheckedTextView =v.checkedTextView
+
 }
 
 class adapter2(val list:ArrayList<Cham>,val context : Context):RecyclerView.Adapter<CustuomViewHolder2>(){
@@ -27,9 +23,14 @@ class adapter2(val list:ArrayList<Cham>,val context : Context):RecyclerView.Adap
 
     override fun onBindViewHolder(holder: CustuomViewHolder2, position: Int) {
         holder.ct.text = list[position].name
+
         holder.itemView.setOnClickListener {
             holder.ct.isChecked = !holder.ct.isChecked
+            mainFragment.clonelist[position] = Cham(mainFragment.img[position], holder.ct.text as String,mainFragment.list[position].box,holder.ct.isChecked)
+
         }
     }
+
+
 
 }
