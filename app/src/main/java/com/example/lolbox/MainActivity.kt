@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -14,6 +16,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        for (index in mainFragment.img.indices ){
+            mainFragment.list.add(Cham(mainFragment.img[index], mainFragment.name[index], box = false, save = false))
+        }
+        for (index in mainFragment.img.indices ){
+            if(mainFragment.list[index].save){
+                mainFragment.savelist.add(mainFragment.list[index])
+            }
+        }
         supportFragmentManager.beginTransaction().replace(R.id.container, mainFragment()).commit()
         save.setOnClickListener {
             val fragment: mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
@@ -68,10 +79,11 @@ class MainActivity : AppCompatActivity() {
             for (index in mainFragment.list.indices) {
                 if (mainFragment.list[index].save!!) {
                     mainFragment.savelist.add(mainFragment.list[index])
+
                 }
             }
             fragment.save()
         }
-        else return
+       else return
     }
 }

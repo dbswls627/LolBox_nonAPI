@@ -8,13 +8,18 @@ import kotlinx.android.synthetic.main.activity_edit.*
 
 class EditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        var boollist = arrayListOf<Bool>()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
         rv2.layoutManager = LinearLayoutManager(this)
-        rv2.adapter=adapter2(mainFragment.list,this)
-        mainFragment.clonelist=mainFragment.list
+        rv2.adapter=adapter2(boollist,this)
+        for (index in mainFragment.list.indices){
+            boollist.add(Bool(mainFragment.list[index].save))
+        }
         edit.setOnClickListener {
-           // mainFragment.list=mainFragment.clonelist
+            for (index in boollist.indices){
+                mainFragment.list[index].save=boollist[index].save
+            }
             setResult(Activity.RESULT_OK)
             finish()
         }
