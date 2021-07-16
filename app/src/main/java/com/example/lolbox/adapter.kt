@@ -5,24 +5,28 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class Cham(val img: Int, val name: String, var box: Boolean?, var save: Boolean)
-class CustuomViewHolder(v : View) : RecyclerView.ViewHolder(v){
+class CustuomViewHolder(v : View,context: Context) : RecyclerView.ViewHolder(v){
     val img =v.img
     val name: TextView =v.name
     val box: TextView =v.text
+    val boximg: ImageView=v.box
+    val db = Room.databaseBuilder(
+            context.applicationContext,
+            AppDatabase::class.java, "database-name"
+    ).allowMainThreadQueries().build()
 }
 
-class adapter(val list:ArrayList<Cham>,val context : Context):RecyclerView.Adapter<CustuomViewHolder>(){
+class adapter(val list:ArrayList<User>, val context : Context):RecyclerView.Adapter<CustuomViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustuomViewHolder {
        val cellForRow=LayoutInflater.from(parent.context).inflate(R.layout.list_item,parent,false)
-        return CustuomViewHolder(cellForRow)
+        return CustuomViewHolder(cellForRow,context)
     }
 
     override fun getItemCount()=list.size
@@ -31,13 +35,20 @@ class adapter(val list:ArrayList<Cham>,val context : Context):RecyclerView.Adapt
         holder.img.setImageResource(list[position].img)
         holder.name.text = list[position].name
         when (list[position].box) {
-            true -> holder.box.text = "상자획득 완료"
-            false -> holder.box.text = "상자획득 가능"
+            true -> {
+                holder.box.text = "상자획득 완료"
+                holder.boximg.setImageResource(R.drawable.boxot)
+            }
+            false -> {
+                holder.box.text = "상자획득 가능"
+                holder.boximg.setImageResource(R.drawable.boxp)
+            }
             else -> holder.box.text="보유 챔피언 설정"
         }
         holder.itemView.setOnLongClickListener() {
             if (list[position].box!=null) {
                 list[position].box = !list[position].box!!
+                holder.db.userDao().upadte(User(list[position].img,list[position].name,list[position].box,list[position].save))
                 notifyDataSetChanged()
             }
 

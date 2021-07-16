@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
     var img: Int,
     @PrimaryKey
     var name: String,
-    var box: Boolean,
+    var box: Boolean?,
     var save: Boolean
     ){
 }

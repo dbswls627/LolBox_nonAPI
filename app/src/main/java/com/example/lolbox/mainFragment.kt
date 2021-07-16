@@ -1,6 +1,5 @@
 package com.example.lolbox
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,10 +10,9 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class mainFragment : Fragment() {
     companion object {
-        var list = arrayListOf<Cham>()
-        val searchlist = arrayListOf<Cham>()
-
-        val savelist = arrayListOf<Cham>()
+        var list = arrayListOf<User>()
+        val searchlist = arrayListOf<User>()
+        val savelist = arrayListOf<User>()
         val name = arrayListOf<String>(
                 "가렌",
                 "갈리오",
@@ -329,6 +327,7 @@ class mainFragment : Fragment() {
                 R.drawable.heimerdinger,
                 R.drawable.hecarim
         )
+
     }
 
 

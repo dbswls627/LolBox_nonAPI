@@ -8,12 +8,8 @@
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbarSize="3dp">
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
@@ -36,7 +32,6 @@
                 android:text="보유 챔피언"/>
 
     </LinearLayout>
-    </HorizontalScrollView>
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"

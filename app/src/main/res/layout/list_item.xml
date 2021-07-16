@@ -8,18 +8,30 @@
     <ImageView
         android:id="@+id/img"
         android:layout_width="70dp"
-        android:layout_height="70dp" />
+        android:layout_height="70dp"
+        android:src="@drawable/ic_launcher_background"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
             android:gravity="left"
+            android:text="트위스티드 페이트"
             android:id="@+id/name"
            />
+        <ImageView
+            android:id="@+id/box"
+            android:layout_width="30dp"
+            android:layout_height="25dp" />
+        </LinearLayout>
         <TextView
+            android:text="22222222"
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
