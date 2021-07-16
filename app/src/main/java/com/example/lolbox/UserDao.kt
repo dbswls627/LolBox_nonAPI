@@ -7,6 +7,8 @@ import androidx.room.OnConflictStrategy.REPLACE
 interface UserDao {
     @Query("SELECT * FROM User")
     fun getAll():List<User>
+    @Query("SELECT * FROM User WHERE name in  (:name)")
+    fun getName(name : String):List<User>
     @Insert(onConflict = REPLACE)
     fun insert(users: User)
     @Delete

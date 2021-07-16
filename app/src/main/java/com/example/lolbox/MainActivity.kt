@@ -28,9 +28,13 @@ class MainActivity : AppCompatActivity() {
                 db.userDao().insert(User(mainFragment.img[i], mainFragment.name[i], false, false))
             }
         }
-        Log.d("test",db.userDao().getAll().toString())
+
         for (index in mainFragment.img.indices ) {
             mainFragment.list.add(Cham(mainFragment.img[index],mainFragment.name[index],false,false))
+        }
+        for (index in mainFragment.img.indices ) {
+            var s: String = db.userDao().getName(mainFragment.name[index]).toString()
+            Log.d("test", s.substring(0,1))
         }
 
         for (index in mainFragment.img.indices ){
