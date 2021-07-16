@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class mainFragment : Fragment() {
     companion object {
-        val list = arrayListOf<Cham>()
+        var list = arrayListOf<Cham>()
         val searchlist = arrayListOf<Cham>()
 
         val savelist = arrayListOf<Cham>()
