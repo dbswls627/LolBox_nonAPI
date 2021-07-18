@@ -9,27 +9,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/all"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:text="모든 챔피언"
                 />
             <Button
                 android:id="@+id/save"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
-               
-                android:layout_weight="1"
+
                 android:text="보유 챔피언"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/boxp"
+                />
+            <TextView
+                android:id="@+id/n"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:text="n개"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_baseline_timer_24"
+                />
+            <TextView
+                android:id="@+id/timer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="124:00"/>
 
     </LinearLayout>
     <FrameLayout

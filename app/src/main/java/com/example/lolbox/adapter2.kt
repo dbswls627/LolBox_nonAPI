@@ -25,9 +25,16 @@ class adapter2(val boollist:ArrayList<Bool>,val context : Context):RecyclerView.
     override fun onBindViewHolder(holder: CustuomViewHolder2, position: Int) {
         holder.ct.text = mainFragment.list[position].name
         holder.ct.isChecked=mainFragment.list[position].save
+        if (mainFragment.bool==true){
+            holder.ct.isChecked=true
+        }
+        if (mainFragment.bool==false){
+            holder.ct.isChecked=false
+        }
         holder.itemView.setOnClickListener {
             holder.ct.isChecked = !holder.ct.isChecked
-            boollist[position].save=true
+            boollist[position].save=holder.ct.isChecked
+
         }
 
     }

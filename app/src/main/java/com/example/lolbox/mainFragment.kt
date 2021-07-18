@@ -327,6 +327,7 @@ class mainFragment : Fragment() {
                 R.drawable.heimerdinger,
                 R.drawable.hecarim
         )
+        var bool:Boolean?=null
 
     }
 
@@ -347,9 +348,10 @@ class mainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val mAdapter=adapter(list,requireContext())
 
         rv.layoutManager = LinearLayoutManager(requireContext())
-        rv.adapter=adapter(list,requireContext())
+        rv.adapter=mAdapter
     }
      fun search(){
          rv.adapter=adapter(searchlist,requireContext())

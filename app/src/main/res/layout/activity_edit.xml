@@ -5,6 +5,22 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rv2"
+        android:text="모두 선택" />
+    <Button
+        android:id="@+id/unselect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rv2"
+        android:text="모두 해제" />
+    </LinearLayout>
     <RelativeLayout
         android:id="@+id/rel"
         android:layout_width="match_parent"

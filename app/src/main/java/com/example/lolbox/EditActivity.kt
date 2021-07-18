@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_edit.*
 class EditActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        mainFragment.bool=null
         val db = Room.databaseBuilder(
                 applicationContext,
                 AppDatabase::class.java, "database-name"
@@ -17,8 +18,10 @@ class EditActivity : AppCompatActivity() {
         var boollist = arrayListOf<Bool>()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
+        val mAdapter = adapter2( boollist,this)
         rv2.layoutManager = LinearLayoutManager(this)
-        rv2.adapter=adapter2(boollist,this)
+        rv2.adapter=mAdapter
+
         for (index in mainFragment.list.indices){
             boollist.add(Bool(mainFragment.list[index].save))
         }
@@ -29,6 +32,21 @@ class EditActivity : AppCompatActivity() {
             }
             setResult(Activity.RESULT_OK)
             finish()
+        }
+        select.setOnClickListener {
+            mainFragment.bool=true
+            for (i in boollist){
+                i.save=true
+            }
+            mAdapter.notifyDataSetChanged()
+
+        }
+        unselect.setOnClickListener {
+            mainFragment.bool=false
+            for (i in boollist){
+                i.save=false
+            }
+            mAdapter.notifyDataSetChanged()
         }
     }
 }

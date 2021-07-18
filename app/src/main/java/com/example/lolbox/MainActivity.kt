@@ -1,7 +1,9 @@
 package com.example.lolbox
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,11 +15,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
+        var check: Int =0
         val db = Room.databaseBuilder(
                 applicationContext,
                 AppDatabase::class.java, "database-name"
@@ -27,9 +30,10 @@ class MainActivity : AppCompatActivity() {
                 db.userDao().insert(User(mainFragment.img[i], mainFragment.name[i], false, false))
             }
         }
+        Log.d("test1",db.userDao().getAllName().toString())
         mainFragment.list=db.userDao().getAll() as ArrayList<User>
 
-        Log.d("test", mainFragment.list.toString())
+        Log.d("test2", mainFragment.list.toString())
 
 
         for (index in mainFragment.img.indices ){
@@ -38,7 +42,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
         supportFragmentManager.beginTransaction().replace(R.id.container, mainFragment()).commit()
+        all.setOnClickListener {
+            check=0
+
+            val fragment : mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
+            fragment.all()
+        }
         save.setOnClickListener {
+            check=1
+
             val fragment: mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
             mainFragment.savelist.clear()
             mainFragment.savelist.add(User(R.drawable.ic_setting,"",null,true))
@@ -49,10 +61,7 @@ class MainActivity : AppCompatActivity() {
             }
            fragment.save()
         }
-            all.setOnClickListener {
-                val fragment : mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
-                fragment.all()
-            }
+
 
 
         search.addTextChangedListener(object : TextWatcher {
@@ -69,15 +78,28 @@ class MainActivity : AppCompatActivity() {
             }
             private fun searchFilter(searchText: String) {
                 mainFragment.searchlist.clear()
-                for (i in 0 until mainFragment.list.size) {
-                    if (mainFragment.list[i].name.length >= searchText.length) {
-                        if (mainFragment.list[i].name.substring(0, searchText.length).contains(searchText)) {
-                            mainFragment.searchlist.add(mainFragment.list[i])
+                if (check == 0) {
+                    for (i in 0 until mainFragment.list.size) {
+                        if (mainFragment.list[i].name.length >= searchText.length) {
+                            if (mainFragment.list[i].name.substring(0, searchText.length).contains(searchText)) {
+                                mainFragment.searchlist.add(mainFragment.list[i])
+                            }
                         }
                     }
+                    val fragment: mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
+                    fragment.search()
                 }
-                val fragment : mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
-                fragment.search()
+                if (check == 1) {
+                    for (i in 0 until mainFragment.savelist.size) {
+                        if (mainFragment.savelist[i].name.length >= searchText.length) {
+                            if (mainFragment.savelist[i].name.substring(0, searchText.length).contains(searchText)) {
+                                mainFragment.searchlist.add(mainFragment.savelist[i])
+                            }
+                        }
+                    }
+                    val fragment: mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
+                    fragment.search()
+                }
             }
         })
     }

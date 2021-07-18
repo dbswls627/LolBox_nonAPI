@@ -9,6 +9,8 @@ interface UserDao {
     fun getAll():List<User>
     @Query("SELECT * FROM User WHERE name in  (:name)")
     fun getName(name : String):List<User>
+    @Query("SELECT * FROM User WHERE name ")
+    fun getAllName():List<User>
     @Insert(onConflict = REPLACE)
     fun insert(users: User)
     @Delete

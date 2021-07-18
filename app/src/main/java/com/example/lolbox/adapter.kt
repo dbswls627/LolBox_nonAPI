@@ -31,25 +31,32 @@ class adapter(val list:ArrayList<User>, val context : Context):RecyclerView.Adap
 
     override fun getItemCount()=list.size
 
-    override fun onBindViewHolder(holder: CustuomViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CustuomViewHolder, position: Int ) {
         holder.img.setImageResource(list[position].img)
         holder.name.text = list[position].name
         when (list[position].box) {
             true -> {
                 holder.box.text = "상자획득 완료"
-                holder.boximg.setImageResource(R.drawable.boxot)
+                holder.boximg.setImageResource(R.drawable.boxo)
             }
             false -> {
                 holder.box.text = "상자획득 가능"
                 holder.boximg.setImageResource(R.drawable.boxp)
             }
-            else -> holder.box.text="보유 챔피언 설정"
+            else -> {
+                holder.box.text="보유 챔피언 설정"
+                holder.boximg.setImageResource(R.drawable.g)
+            }
         }
         holder.itemView.setOnLongClickListener() {
             if (list[position].box!=null) {
                 list[position].box = !list[position].box!!
                 holder.db.userDao().upadte(User(list[position].img,list[position].name,list[position].box,list[position].save))
                 notifyDataSetChanged()
+            }
+            else
+            {
+                true
             }
 
                 true
