@@ -3,37 +3,43 @@ package com.example.lolbox
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
-
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-
+    var time :String?=null
+    val dday = Calendar.getInstance().getTimeInMillis()+1000*60*60*24*7
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var check: Int =0
+        showtimer()
+        roof()
         val db = Room.databaseBuilder(
                 applicationContext,
                 AppDatabase::class.java, "database-name"
         ).allowMainThreadQueries().build()
+
+
         if ( db.userDao().getAll().toString()=="[]") {
             for (i in mainFragment.img.indices) {
                 db.userDao().insert(User(mainFragment.img[i], mainFragment.name[i], false, false))
             }
         }
-        Log.d("test1",db.userDao().getAllName().toString())
         mainFragment.list=db.userDao().getAll() as ArrayList<User>
 
-        Log.d("test2", mainFragment.list.toString())
+      //  Log.d("test2", mainFragment.list.toString())
 
 
         for (index in mainFragment.img.indices ){
@@ -119,5 +125,24 @@ class MainActivity : AppCompatActivity() {
             fragment.save()
         }
        else return
+    }
+    private val mDelayHandler: Handler by lazy {
+        Handler()
+    }
+    private fun roof(){
+        mDelayHandler.postDelayed(::showtimer, 1000) // 10초 후에 showGuest 함수를 실행한다.
+    }
+
+    private fun showtimer(){
+        mainFragment.today= Calendar.getInstance()
+        val day=(dday-mainFragment.today.time.time)
+        n.text=mainFragment.n.toString()+"개 획득 가능"
+        var d = day/(1000*60*60*24)//1000=초   1000*60=분  1000*60*60=시    일 1000*60*60*24
+        var h = day/(1000*60*60)
+        var m = day/(1000*60)
+        var s = day/(1000)
+        time=d.toString()+"일"+(h-d*24).toString()+"시"+(m-h*60).toString()+"분"+(s-m*60).toString()+"초"
+        timer.text=time
+        roof() // 코드 실행뒤에 계속해서 반복하도록 작업한다.
     }
 }

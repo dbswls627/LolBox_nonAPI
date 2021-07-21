@@ -11,6 +11,5 @@ import androidx.room.PrimaryKey
     var name: String,
     var box: Boolean?,
     var save: Boolean
-    ){
-}
+    )
     

@@ -7,9 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_main.*
+import java.util.*
 
 class mainFragment : Fragment() {
     companion object {
+        var n:Int?=3
+        var t:Long?=null
+        var today: Calendar= Calendar.getInstance()
         var list = arrayListOf<User>()
         val searchlist = arrayListOf<User>()
         val savelist = arrayListOf<User>()

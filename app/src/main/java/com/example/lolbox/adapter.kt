@@ -2,6 +2,7 @@ package com.example.lolbox
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import kotlinx.android.synthetic.main.list_item.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CustuomViewHolder(v : View,context: Context) : RecyclerView.ViewHolder(v){
     val img =v.img
@@ -52,6 +55,10 @@ class adapter(val list:ArrayList<User>, val context : Context):RecyclerView.Adap
             if (list[position].box!=null) {
                 list[position].box = !list[position].box!!
                 holder.db.userDao().upadte(User(list[position].img,list[position].name,list[position].box,list[position].save))
+                if (mainFragment.n==3) {
+
+                    Log.d("test",(mainFragment.t.toString()))
+                }
                 notifyDataSetChanged()
             }
             else

@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.4"
-                android:text="n개"/>
+                android:text="3개획득 가능"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
