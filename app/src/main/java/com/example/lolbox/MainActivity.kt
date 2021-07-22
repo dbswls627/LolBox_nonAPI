@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
@@ -17,30 +18,31 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     var time :String?=null
-    val dday = Calendar.getInstance().getTimeInMillis()+1000*60*60*24*7
+    var day :Long = 0
     @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var check: Int =0
-        showtimer()
-        roof()
+
         val db = Room.databaseBuilder(
                 applicationContext,
                 AppDatabase::class.java, "database-name"
         ).allowMainThreadQueries().build()
 
-
         if ( db.userDao().getAll().toString()=="[]") {
             for (i in mainFragment.img.indices) {
                 db.userDao().insert(User(mainFragment.img[i], mainFragment.name[i], false, false))
             }
+            db.boxDao().insert(Box(0,3, null))
         }
+        mainFragment.dday = db.boxDao().getTime()
+
+        mainFragment.n=db.boxDao().getN()
         mainFragment.list=db.userDao().getAll() as ArrayList<User>
-
-      //  Log.d("test2", mainFragment.list.toString())
-
+        showtimer()
+        roof()
 
         for (index in mainFragment.img.indices ){
             if(mainFragment.list[index].save){
@@ -134,15 +136,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showtimer(){
+        val db = Room.databaseBuilder(
+                applicationContext,
+                AppDatabase::class.java, "database-name"
+        ).allowMainThreadQueries().build()
+        if (mainFragment.dday!=null){
+            if (-(1000 * 60 * 60 * 24 * 7)<day&&day<0){
+                mainFragment.n= mainFragment.n!! +1
+                mainFragment.dday=mainFragment.dday+(1000 * 60 * 60 * 24 * 7)
+                db.boxDao().upadte(Box(0, mainFragment.n!!,mainFragment.dday))
+            }
+            else if (-(1000 * 60 * 60 * 24 * 7)*2<day&&day<-(1000 * 60 * 60 * 24 * 7)){
+                mainFragment.n= mainFragment.n!! +2
+                if (mainFragment.n!! >3) mainFragment.n=3
+                mainFragment.dday=mainFragment.dday+(1000 * 60 * 60 * 24 * 7)*2
+                db.boxDao().upadte(Box(0, mainFragment.n!!,mainFragment.dday))
+            }
+        }
         mainFragment.today= Calendar.getInstance()
-        val day=(dday-mainFragment.today.time.time)
+        day=(mainFragment.dday?.minus(mainFragment.today.time.time))
         n.text=mainFragment.n.toString()+"개 획득 가능"
         var d = day/(1000*60*60*24)//1000=초   1000*60=분  1000*60*60=시    일 1000*60*60*24
         var h = day/(1000*60*60)
         var m = day/(1000*60)
         var s = day/(1000)
         time=d.toString()+"일"+(h-d*24).toString()+"시"+(m-h*60).toString()+"분"+(s-m*60).toString()+"초"
-        timer.text=time
+        if (d<-18000)  timer.text="타이머 설정"
+        if (mainFragment.n==3) timer.text="꽉참"
+        else timer.text=time
+
         roof() // 코드 실행뒤에 계속해서 반복하도록 작업한다.
     }
 }

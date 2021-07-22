@@ -55,9 +55,15 @@ class adapter(val list:ArrayList<User>, val context : Context):RecyclerView.Adap
             if (list[position].box!=null) {
                 list[position].box = !list[position].box!!
                 holder.db.userDao().upadte(User(list[position].img,list[position].name,list[position].box,list[position].save))
-                if (mainFragment.n==3) {
-
-                    Log.d("test",(mainFragment.t.toString()))
+                if (list[position].box==true) {
+                    if (mainFragment.n == 3) {
+                        mainFragment.dday = Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 7
+                        holder.db.boxDao().upadte(Box(0, mainFragment.n!!, mainFragment.dday))
+                    }
+                     if (mainFragment.n!! >0) {
+                    mainFragment.n = mainFragment.n!! - 1
+                    holder.db.boxDao().upadte(Box(0, mainFragment.n!!,mainFragment.dday))
+                     }
                 }
                 notifyDataSetChanged()
             }

@@ -11,8 +11,9 @@ import java.util.*
 
 class mainFragment : Fragment() {
     companion object {
-        var n:Int?=3
+        var n:Int?=null
         var t:Long?=null
+        var dday :Long=0
         var today: Calendar= Calendar.getInstance()
         var list = arrayListOf<User>()
         val searchlist = arrayListOf<User>()
