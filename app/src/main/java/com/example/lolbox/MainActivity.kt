@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import android.view.Window
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
@@ -68,6 +68,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
            fragment.save()
+        }
+        n.setOnClickListener {
+            val dlg = nDialog(this)
+            dlg.show()
+
+        }
+        timer.setOnClickListener {
+            val dlg = timerDialog(this)
+            dlg.show()
         }
 
 
@@ -168,3 +177,4 @@ class MainActivity : AppCompatActivity() {
         roof() // 코드 실행뒤에 계속해서 반복하도록 작업한다.
     }
 }
+
