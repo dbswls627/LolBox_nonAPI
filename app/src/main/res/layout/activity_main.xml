@@ -26,18 +26,15 @@
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
-
                 android:text="보유 챔피언"/>
             <ImageView
                 android:id="@+id/boxIcon"
-                android:onClick="mOnClick"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/boxp"
                 />
             <TextView
                 android:id="@+id/n"
-                android:onClick="mOnClick"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
@@ -45,13 +42,11 @@
                 android:text="3개획득 가능"/>
             <ImageView
                 android:id="@+id/timerIcon"
-                android:onClick="onClick"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_baseline_timer_24"
                 />
             <TextView
-                android:onClick="mOnClick"
                 android:id="@+id/timer"
                 android:textSize="10sp"
                 android:textStyle="bold"
