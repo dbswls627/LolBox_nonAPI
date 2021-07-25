@@ -8,10 +8,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.view.View
 import android.view.Window
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -19,11 +23,14 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     var time :String?=null
     var day :Long = 0
-    @RequiresApi(Build.VERSION_CODES.N)
-    @SuppressLint("ResourceAsColor")
+   // @RequiresApi(Build.VERSION_CODES.N)
+    //@SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        MobileAds.initialize(this, getString(R.string.admob_app_id))
+        adView.loadAd(AdRequest.Builder().build())
         var check: Int =0
 
         val db = Room.databaseBuilder(
@@ -41,10 +48,11 @@ class MainActivity : AppCompatActivity() {
 
         mainFragment.n=db.boxDao().getN()
         mainFragment.list=db.userDao().getAll() as ArrayList<User>
+       
         showtimer()
         roof()
 
-        for (index in mainFragment.img.indices ){
+        for (index in mainFragment.list.indices ){
             if(mainFragment.list[index].save){
                 mainFragment.savelist.add(mainFragment.list[index])
             }
@@ -58,7 +66,6 @@ class MainActivity : AppCompatActivity() {
         }
         save.setOnClickListener {
             check=1
-
             val fragment: mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
             mainFragment.savelist.clear()
             mainFragment.savelist.add(User(R.drawable.ic_setting,"",null,true))
@@ -69,12 +76,20 @@ class MainActivity : AppCompatActivity() {
             }
            fragment.save()
         }
+        boxIcon.setOnClickListener {
+            val dlg = nDialog(this)
+            dlg.show()
+        }
         n.setOnClickListener {
             val dlg = nDialog(this)
             dlg.show()
 
         }
         timer.setOnClickListener {
+            val dlg = timerDialog(this)
+            dlg.show()
+        }
+        timerIcon.setOnClickListener {
             val dlg = timerDialog(this)
             dlg.show()
         }
@@ -170,11 +185,17 @@ class MainActivity : AppCompatActivity() {
         var m = day/(1000*60)
         var s = day/(1000)
         time=d.toString()+"일"+(h-d*24).toString()+"시"+(m-h*60).toString()+"분"+(s-m*60).toString()+"초"
-        if (d<-18000)  timer.text="타이머 설정"
+
         if (mainFragment.n==3) timer.text="꽉참"
+        else if (mainFragment.dday.toInt()==0){
+            timer.text="타이머설정"
+        }
         else timer.text=time
+
+
 
         roof() // 코드 실행뒤에 계속해서 반복하도록 작업한다.
     }
+
 }
 

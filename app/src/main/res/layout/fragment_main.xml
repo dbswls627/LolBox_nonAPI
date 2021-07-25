@@ -3,13 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
   >
-
-  <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rv"
+  <RelativeLayout
+      android:id="@+id/rel"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="8dp"
-      android:layout_marginEnd="8dp"
-      android:layout_marginBottom="8dp" />
+      android:layout_height="wrap_content">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp" />
+
+
+  </RelativeLayout>
+
 </LinearLayout>

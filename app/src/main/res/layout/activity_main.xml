@@ -29,35 +29,58 @@
 
                 android:text="보유 챔피언"/>
             <ImageView
+                android:id="@+id/boxIcon"
+                android:onClick="mOnClick"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/boxp"
                 />
             <TextView
                 android:id="@+id/n"
+                android:onClick="mOnClick"
+                android:textSize="10sp"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.4"
                 android:text="3개획득 가능"/>
             <ImageView
+                android:id="@+id/timerIcon"
+                android:onClick="onClick"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_baseline_timer_24"
                 />
             <TextView
+                android:onClick="mOnClick"
                 android:id="@+id/timer"
-                android:layout_width="0dp"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="124:00"/>
 
     </LinearLayout>
-    <FrameLayout
-        android:id="@+id/container"
+
+
+
+    <RelativeLayout
+        android:id="@+id/rel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-    </FrameLayout>
-
-
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </FrameLayout>
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBottom="@+id/container"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id"/>
+    </RelativeLayout>
 </LinearLayout>

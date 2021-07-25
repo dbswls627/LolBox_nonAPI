@@ -31,12 +31,12 @@
             android:layout_height="wrap_content"
             android:paddingBottom="40dp">
         </androidx.recyclerview.widget.RecyclerView>
-
         <Button
             android:id="@+id/edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/rv2"
             android:text="완료" />
+
     </RelativeLayout>
 </LinearLayout>

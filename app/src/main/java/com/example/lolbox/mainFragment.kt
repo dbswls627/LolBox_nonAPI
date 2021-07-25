@@ -1,11 +1,13 @@
 package com.example.lolbox
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.*
 
@@ -100,6 +102,7 @@ class mainFragment : Fragment() {
                 "아이번",
                 "아지르",
                 "아칼리",
+                "아크샨",
                 "아트록스",
                 "아펠리오스",
                 "알리스타",
@@ -257,6 +260,7 @@ class mainFragment : Fragment() {
                 R.drawable.ivern,
                 R.drawable.azir,
                 R.drawable.akali,
+                R.drawable.akshan,
                 R.drawable.aatrox,
                 R.drawable.aphelios,
                 R.drawable.alistar,
@@ -347,6 +351,8 @@ class mainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_main, null)
+
+
 
         return view
     }
