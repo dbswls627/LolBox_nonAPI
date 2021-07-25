@@ -11,6 +11,8 @@ interface BoxDao {
  fun getTime() : Long
  @Query("SELECT n FROM Box")
  fun getN() : Int
+ @Query("SELECT b FROM Box")
+ fun getB() : Boolean
  @Insert(onConflict = REPLACE)
  fun insert(box:Box)
  @Delete

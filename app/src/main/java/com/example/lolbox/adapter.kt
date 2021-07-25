@@ -58,11 +58,11 @@ class adapter(val list:ArrayList<User>, val context : Context):RecyclerView.Adap
                 if (list[position].box==true) {
                     if (mainFragment.n == 3) {
                         mainFragment.dday = Calendar.getInstance().getTimeInMillis() + 1000 * 60 * 60 * 24 * 7
-                        holder.db.boxDao().upadte(Box(0, mainFragment.n!!, mainFragment.dday))
+                        holder.db.boxDao().upadte(Box(0, mainFragment.n!!, mainFragment.dday,mainFragment.checkB))
                     }
                      if (mainFragment.n!! >0) {
                     mainFragment.n = mainFragment.n!! - 1
-                    holder.db.boxDao().upadte(Box(0, mainFragment.n!!,mainFragment.dday))
+                    holder.db.boxDao().upadte(Box(0, mainFragment.n!!,mainFragment.dday,mainFragment.checkB))
                      }
                 }
                 notifyDataSetChanged()

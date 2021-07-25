@@ -5,28 +5,24 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.Window
 import androidx.room.Room
 import kotlinx.android.synthetic.main.dialog.*
+import kotlinx.android.synthetic.main.helpdialog.*
 
-class nDialog(context :Context) : Dialog(context) {
+class helpDialog(context :Context) : Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         val db = Room.databaseBuilder(
                 context.applicationContext,
                 AppDatabase::class.java, "database-name"
         ).allowMainThreadQueries().build()
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.dialog)
 
-        np.minValue=0
-        np.maxValue=3
-        np.value=mainFragment.n!!
-        ok.setOnClickListener {
-            mainFragment.n=np.value
-            db.boxDao().upadte(Box(0, mainFragment.n!!, mainFragment.dday,mainFragment.checkB))
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.helpdialog)
+        button1.setOnClickListener {
+            db.boxDao().upadte(Box(0, mainFragment.n!!, mainFragment.dday,true))
             this.dismiss()
         }
-        cancel_button.setOnClickListener {
+        button2.setOnClickListener {
             this.dismiss()
         }
     }

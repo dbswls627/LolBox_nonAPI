@@ -38,7 +38,7 @@ class timerDialog(context :Context) : Dialog(context) {
         min.value = (m-h*60).toInt()
         t_ok.setOnClickListener {
             mainFragment.dday = Calendar.getInstance().getTimeInMillis() + (1000 * 60 * 60 * 24*day.value)+(1000 * 60 * 60*hour.value)+(1000 * 60 *min.value)
-            db.boxDao().upadte(Box(0, mainFragment.n!!, mainFragment.dday))
+            db.boxDao().upadte(Box(0, mainFragment.n!!, mainFragment.dday,mainFragment.checkB))
             this.dismiss()
         }
         t_cancel_button.setOnClickListener {

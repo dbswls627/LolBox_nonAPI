@@ -10,6 +10,7 @@ import java.util.*
         @PrimaryKey
         var p:Int,
         var n:Int,
-        var time:Long?
+        var time:Long?,
+        var b:Boolean
     )
     

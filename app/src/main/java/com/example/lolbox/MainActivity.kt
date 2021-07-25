@@ -1,17 +1,13 @@
 package com.example.lolbox
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.View
 import android.view.Window
-import androidx.annotation.RequiresApi
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.google.android.gms.ads.AdRequest
@@ -31,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         MobileAds.initialize(this, getString(R.string.admob_app_id))
         adView.loadAd(AdRequest.Builder().build())
-        var check: Int =0
+        var checkList: Int =0
 
         val db = Room.databaseBuilder(
                 applicationContext,
@@ -42,13 +38,19 @@ class MainActivity : AppCompatActivity() {
             for (i in mainFragment.img.indices) {
                 db.userDao().insert(User(mainFragment.img[i], mainFragment.name[i], false, false))
             }
-            db.boxDao().insert(Box(0,3, null))
+            db.boxDao().insert(Box(0,3, null,false))
         }
-        mainFragment.dday = db.boxDao().getTime()
+       mainFragment.dday = db.boxDao().getTime()
+       mainFragment.checkB = db.boxDao().getB()
+       if (!mainFragment.checkB){
+           var dlg =helpDialog(this)
+           dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
+           dlg.show()
 
+       }
         mainFragment.n=db.boxDao().getN()
         mainFragment.list=db.userDao().getAll() as ArrayList<User>
-       
+
         showtimer()
         roof()
 
@@ -59,18 +61,18 @@ class MainActivity : AppCompatActivity() {
         }
         supportFragmentManager.beginTransaction().replace(R.id.container, mainFragment()).commit()
         all.setOnClickListener {
-            check=0
+            checkList=0
 
             val fragment : mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
             fragment.all()
         }
         save.setOnClickListener {
-            check=1
+            checkList=1
             val fragment: mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
             mainFragment.savelist.clear()
             mainFragment.savelist.add(User(R.drawable.ic_setting,"",null,true))
             for (index in mainFragment.list.indices) {
-                if (mainFragment.list[index].save!!) {
+                if (mainFragment.list[index].save) {
                     mainFragment.savelist.add(mainFragment.list[index])
                 }
             }
@@ -78,19 +80,23 @@ class MainActivity : AppCompatActivity() {
         }
         boxIcon.setOnClickListener {
             val dlg = nDialog(this)
+            dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dlg.show()
         }
         n.setOnClickListener {
             val dlg = nDialog(this)
+            dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dlg.show()
 
         }
         timer.setOnClickListener {
             val dlg = timerDialog(this)
+            dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dlg.show()
         }
         timerIcon.setOnClickListener {
             val dlg = timerDialog(this)
+            dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dlg.show()
         }
 
@@ -110,7 +116,7 @@ class MainActivity : AppCompatActivity() {
             }
             private fun searchFilter(searchText: String) {
                 mainFragment.searchlist.clear()
-                if (check == 0) {
+                if (checkList == 0) {
                     for (i in 0 until mainFragment.list.size) {
                         if (mainFragment.list[i].name.length >= searchText.length) {
                             if (mainFragment.list[i].name.substring(0, searchText.length).contains(searchText)) {
@@ -121,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                     val fragment: mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
                     fragment.search()
                 }
-                if (check == 1) {
+                if (checkList == 1) {
                     for (i in 0 until mainFragment.savelist.size) {
                         if (mainFragment.savelist[i].name.length >= searchText.length) {
                             if (mainFragment.savelist[i].name.substring(0, searchText.length).contains(searchText)) {
@@ -143,7 +149,7 @@ class MainActivity : AppCompatActivity() {
             mainFragment.savelist.clear()
             mainFragment.savelist.add(User(R.drawable.ic_setting,"",null,true))
             for (index in mainFragment.list.indices) {
-                if (mainFragment.list[index].save!!) {
+                if (mainFragment.list[index].save) {
                     mainFragment.savelist.add(mainFragment.list[index])
 
                 }
@@ -168,17 +174,17 @@ class MainActivity : AppCompatActivity() {
             if (-(1000 * 60 * 60 * 24 * 7)<day&&day<0){
                 mainFragment.n= mainFragment.n!! +1
                 mainFragment.dday=mainFragment.dday+(1000 * 60 * 60 * 24 * 7)
-                db.boxDao().upadte(Box(0, mainFragment.n!!,mainFragment.dday))
+                db.boxDao().upadte(Box(0, mainFragment.n!!,mainFragment.dday,mainFragment.checkB))
             }
             else if (-(1000 * 60 * 60 * 24 * 7)*2<day&&day<-(1000 * 60 * 60 * 24 * 7)){
                 mainFragment.n= mainFragment.n!! +2
                 if (mainFragment.n!! >3) mainFragment.n=3
                 mainFragment.dday=mainFragment.dday+(1000 * 60 * 60 * 24 * 7)*2
-                db.boxDao().upadte(Box(0, mainFragment.n!!,mainFragment.dday))
+                db.boxDao().upadte(Box(0, mainFragment.n!!,mainFragment.dday,mainFragment.checkB))
             }
         }
         mainFragment.today= Calendar.getInstance()
-        day=(mainFragment.dday?.minus(mainFragment.today.time.time))
+        day=(mainFragment.dday.minus(mainFragment.today.time.time))
         n.text=mainFragment.n.toString()+"개 획득 가능"
         var d = day/(1000*60*60*24)//1000=초   1000*60=분  1000*60*60=시    일 1000*60*60*24
         var h = day/(1000*60*60)

@@ -16,6 +16,7 @@ class mainFragment : Fragment() {
         var n:Int?=null
         var t:Long?=null
         var dday :Long=0
+        var checkB :Boolean=true
         var today: Calendar= Calendar.getInstance()
         var list = arrayListOf<User>()
         val searchlist = arrayListOf<User>()
