@@ -45,6 +45,12 @@ class MainActivity : AppCompatActivity() {
        if (!mainFragment.checkB){
            var dlg =helpDialog(this)
            dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
+           val lp = WindowManager.LayoutParams()
+           lp.copyFrom(dlg.window?.attributes)
+           lp.width = WindowManager.LayoutParams.MATCH_PARENT
+           lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+           dlg.show()
+           dlg.window?.attributes = lp
            dlg.show()
 
        }
@@ -81,22 +87,46 @@ class MainActivity : AppCompatActivity() {
         boxIcon.setOnClickListener {
             val dlg = nDialog(this)
             dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            val lp = WindowManager.LayoutParams()
+            lp.copyFrom(dlg.window?.attributes)
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT
             dlg.show()
+            dlg.window?.attributes = lp
+
         }
         n.setOnClickListener {
             val dlg = nDialog(this)
             dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            val lp = WindowManager.LayoutParams()
+            lp.copyFrom(dlg.window?.attributes)
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+            dlg.show()
+            dlg.window?.attributes = lp
             dlg.show()
 
         }
         timer.setOnClickListener {
             val dlg = timerDialog(this)
             dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            val lp = WindowManager.LayoutParams()
+            lp.copyFrom(dlg.window?.attributes)
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+            dlg.show()
+            dlg.window?.attributes = lp
             dlg.show()
         }
         timerIcon.setOnClickListener {
             val dlg = timerDialog(this)
             dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            val lp = WindowManager.LayoutParams()
+            lp.copyFrom(dlg.window?.attributes)
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+            dlg.show()
+            dlg.window?.attributes = lp
             dlg.show()
         }
 
