@@ -68,12 +68,13 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(R.id.container, mainFragment()).commit()
         all.setOnClickListener {
             checkList=0
-
+            search.text=null
             val fragment : mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
             fragment.all()
         }
         save.setOnClickListener {
             checkList=1
+            search.text=null
             val fragment: mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
             mainFragment.savelist.clear()
             mainFragment.savelist.add(User(R.drawable.ic_setting,"",null,true))
@@ -154,6 +155,40 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                     }
+                    if (searchText=="그브") {
+                        mainFragment.searchlist.add(db.userDao().getU("그레이브즈"))
+                    }
+                    if (searchText=="윌럼프") {
+                        mainFragment.searchlist.add(db.userDao().getU("누누와윌럼프"))
+                    }
+                    if (searchText=="드븐") {
+                        mainFragment.searchlist.add(db.userDao().getU("드레이븐"))
+                    }
+                    if (searchText=="마이") {
+                        mainFragment.searchlist.add(db.userDao().getU("마스터이"))
+                    }
+                    if (searchText=="미포") {
+                        mainFragment.searchlist.add(db.userDao().getU("미스포츈"))
+                    }
+                    if (searchText=="볼베") {
+                        mainFragment.searchlist.add(db.userDao().getU("볼리베어"))
+                    }
+                    if (searchText=="블미") {
+                        mainFragment.searchlist.add(db.userDao().getU("블라디미르"))
+                    }
+                    if (searchText=="블랭" ||searchText=="블크" || searchText=="블츠") {
+                        mainFragment.searchlist.add(db.userDao().getU("블리츠크랭크"))
+                    }
+
+                    if (searchText=="솔" ||searchText=="아우솔"||searchText=="아우렐리온솔") {
+                        mainFragment.searchlist.add(db.userDao().getU("아우렐리온 솔"))
+                    }
+                    if (searchText=="트타") {
+                        mainFragment.searchlist.add(db.userDao().getU("트리스타나"))
+                    }
+                    if (searchText=="트페") {
+                        mainFragment.searchlist.add(db.userDao().getU("트위스티드페이트"))
+                    }
                     val fragment: mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
                     fragment.search()
                 }
@@ -164,6 +199,39 @@ class MainActivity : AppCompatActivity() {
                                 mainFragment.searchlist.add(mainFragment.savelist[i])
                             }
                         }
+                    }
+                    if (searchText=="그브"&&"그레이브즈" in  db.userDao().getSave()) {
+                        mainFragment.searchlist.add(db.userDao().getU("그레이브즈"))
+                    }
+                    if (searchText=="윌럼프" ||searchText=="누누와윌럼프"&&"누누와 윌럼프" in  db.userDao().getSave()) {
+                        mainFragment.searchlist.add(db.userDao().getU("누누와윌럼프"))
+                    }
+                    if (searchText=="드븐"&&"드레이븐" in  db.userDao().getSave()) {
+                        mainFragment.searchlist.add(db.userDao().getU("드레이븐"))
+                    }
+                    if (searchText=="마이"|| searchText=="마스터이"&&"마스터 이" in  db.userDao().getSave()) {
+                        mainFragment.searchlist.add(db.userDao().getU("마스터이"))
+                    }
+                    if (searchText=="미포"||searchText=="미스포츈"&&"미스 포츈" in  db.userDao().getSave()) {
+                        mainFragment.searchlist.add(db.userDao().getU("미스포츈"))
+                    }
+                    if (searchText=="볼베"&&"볼리베어" in  db.userDao().getSave()) {
+                        mainFragment.searchlist.add(db.userDao().getU("볼리베어"))
+                    }
+                    if (searchText=="블미"&&"블라디미르" in  db.userDao().getSave()) {
+                        mainFragment.searchlist.add(db.userDao().getU("블라디미르"))
+                    }
+                    if (searchText=="블랭" ||searchText=="블크" || searchText=="블츠"&&"블리츠크랭크" in  db.userDao().getSave()) {
+                        mainFragment.searchlist.add(db.userDao().getU("블리츠크랭크"))
+                    }
+                    if (searchText=="솔" ||searchText=="아우솔"||searchText=="아우렐리온솔"&&"아우렐리온 솔" in  db.userDao().getSave()) {
+                        mainFragment.searchlist.add(db.userDao().getU("아우렐리온 솔"))
+                    }
+                    if (searchText=="트타"&&"트리스타나" in  db.userDao().getSave()) {
+                        mainFragment.searchlist.add(db.userDao().getU("트리스타나"))
+                    }
+                    if (searchText=="트페"||searchText=="트위스티드페이트"&&"트위스티드 페이트" in  db.userDao().getSave()) {
+                        mainFragment.searchlist.add(db.userDao().getU("트위스티드페이트"))
                     }
                     val fragment: mainFragment = supportFragmentManager.findFragmentById(R.id.container) as mainFragment
                     fragment.search()

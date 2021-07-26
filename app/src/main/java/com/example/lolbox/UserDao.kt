@@ -8,8 +8,10 @@ import java.sql.Time
 interface UserDao {
     @Query("SELECT * FROM User")
     fun getAll():List<User>
-    @Query("SELECT name FROM User WHERE name in  (:name)")
-    fun getName(name : String):List<String>
+    @Query("SELECT name FROM User WHERE save")
+    fun getSave():List<String>
+    @Query("SELECT * FROM User WHERE name in  (:name)")
+    fun getU(name : String):User
     @Query("SELECT * FROM User WHERE name ")
     fun getAllName():List<User>
     @Insert(onConflict = REPLACE)
