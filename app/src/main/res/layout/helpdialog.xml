@@ -9,21 +9,10 @@
     <ImageView
         android:id="@+id/help1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher" />
-    <TextView
-        android:text="설명"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <ImageView
-        android:id="@+id/help2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher" />
-    <TextView
-        android:text="설명"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="248dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/help" />
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
