@@ -18,7 +18,7 @@ class EditActivity : AppCompatActivity() {
         var boollist = arrayListOf<Bool>()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
-        val mAdapter = adapter2( boollist,this)
+        val mAdapter = adapter2( boollist)
         rv2.layoutManager = LinearLayoutManager(this)
         rv2.adapter=mAdapter
 

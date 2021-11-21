@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.abs
 
 
@@ -21,13 +23,12 @@ class MainActivity : AppCompatActivity() {
     var time :String?=null
     var day :Long = 0
 
-   // @RequiresApi(Build.VERSION_CODES.N)
-    //@SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        MobileAds.initialize(this, getString(R.string.admob_app_id))
-        adView.loadAd(AdRequest.Builder().build())
+        /*MobileAds.initialize(this, getString(R.string.admob_app_id))
+        adView.loadAd(AdRequest.Builder().build())*/
         var checkList: Int =0
 
         val db = Room.databaseBuilder(
@@ -39,10 +40,12 @@ class MainActivity : AppCompatActivity() {
             for (i in mainFragment.img.indices) {
                 db.userDao().insert(User(mainFragment.img[i], mainFragment.name[i], false, false))
             }
-            db.boxDao().insert(Box(0,3, null,false))
+            db.boxDao().insert(Box(0,4, null,false))
         }
-       mainFragment.dday = db.boxDao().getTime()
-       mainFragment.checkB = db.boxDao().getB()
+       if ( "벡스" !in db.userDao().getName()) {
+               db.userDao().insert(User(R.drawable.zz, "벡스", false, false))
+           }
+      /* Log.d("test",db.userDao().getName().toString())*/
        if (!mainFragment.checkB){
            var dlg =helpDialog(this)
            dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -55,17 +58,20 @@ class MainActivity : AppCompatActivity() {
            dlg.show()
 
        }
-        mainFragment.n=db.boxDao().getN()
-        mainFragment.list=db.userDao().getAll() as ArrayList<User>
-
+       mainFragment.n=db.boxDao().getN()
+       mainFragment.list=db.userDao().getSort() as ArrayList<User>
+       mainFragment.savelist=db.userDao().getSaveList() as ArrayList<User>
+       mainFragment.dday = db.boxDao().getTime()
+       mainFragment.checkB = db.boxDao().getB()
         showtimer()
         roof()
 
-        for (index in mainFragment.list.indices ){
+       /* for (index in mainFragment.list.indices ){
             if(mainFragment.list[index].save){
                 mainFragment.savelist.add(mainFragment.list[index])
             }
-        }
+        }*/
+
         supportFragmentManager.beginTransaction().replace(R.id.container, mainFragment()).commit()
         all.setOnClickListener {
             checkList=0
@@ -135,7 +141,7 @@ class MainActivity : AppCompatActivity() {
 
 
         search.addTextChangedListener(object : TextWatcher {
-//
+            //
             override fun afterTextChanged(s: Editable) {
                 val searchText: String = search.text.toString()
                 searchFilter(searchText)

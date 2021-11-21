@@ -10,16 +10,16 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.*
 
 class mainFragment : Fragment() {
-    companion object {
-        var n:Int?=null
-        var t:Long?=null
-        var dday :Long=0
-        var checkB :Boolean=true
-        var today: Calendar= Calendar.getInstance()
-        var list = arrayListOf<User>()
-        val searchlist = arrayListOf<User>()
-        val savelist = arrayListOf<User>()
-        val name = arrayListOf<String>(
+        companion object {
+                var n:Int?=null
+                var t:Long?=null
+                var dday :Long=0
+                var checkB :Boolean=true
+                var today: Calendar= Calendar.getInstance()
+                var list = arrayListOf<User>()
+                val searchlist = arrayListOf<User>()
+                var savelist = arrayListOf<User>()
+                val name = arrayListOf<String>(
                 "가렌",
                 "갈리오",
                 "갱플랭크",
@@ -177,7 +177,7 @@ class mainFragment : Fragment() {
                 "하이머딩거",
                 "헤카림"
         )
-        val img = arrayListOf<Int>(
+                val img = arrayListOf(
                 R.drawable.garen,
                 R.drawable.galio,
                 R.drawable.gangplank,
@@ -335,24 +335,16 @@ class mainFragment : Fragment() {
                 R.drawable.heimerdinger,
                 R.drawable.hecarim
         )
-        var bool:Boolean?=null
-
+                var bool:Boolean?=null
     }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_main, null)
-
-
-
         return view
     }
 
